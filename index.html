@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"/>
+
+    <title>Gerenciador de gastos</title>
+</head>
+<body>
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="js/lista.js"></script>
+
+    <h2>Bem-vindo!</h2>
+    <div class="d-flex flex-column header">
+        <div>
+            <div class="flex-grow-1">
+                <h3>Resumo financeiro</h3>
+                <h1>R$0,00</h1>
+             </div>
+            <div class="d-flex justify-content-end">
+                <a href="novaDespesa.html"><button type="button" class="btn btn-light">Nova Despesa</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="lista container mt-4">
+        <h3>Despesas do Mês</h3>
+        <table class="table table-striped table-borderless table-hover ">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="expense-list" class="table-group-divider">
+                
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

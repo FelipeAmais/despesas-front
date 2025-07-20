@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+div.header {
+    padding: 20px;
+    border-radius: 15px;
+    border: gray 1px solid;
+}
+
+div.lista{
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: gray 1px solid;
+    border-radius: 15px;
+}
+
+button.btn-light{
+    border: gray 1px solid;
+    border-radius: 5px;
+    
+}
