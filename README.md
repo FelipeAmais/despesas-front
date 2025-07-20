@@ -32,7 +32,7 @@ Este é o front-end de um sistema simples de gerenciamento de gastos pessoais, d
 
 ### 📌 Autor  
 Desenvolvido por Felipe de Oliveira Romeiro Amais  
-Acadêmico de Ciência da Computação - UNIPAR  
+Acadêmico de Sistemas de Informação - UNIPAR 
 https://github.com/FelipeAmais
 
 ---
