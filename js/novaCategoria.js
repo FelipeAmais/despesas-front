@@ -1,3 +1,5 @@
+//Listener para o formulário de categoria
+// Cria uma nova categoria e redireciona para novaDespesa.html
 document.getElementById('form-categoria').addEventListener('submit', (e) =>{
     e.preventDefault();
     const categoria = {
