@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('http://localhost:8080/despesas')
     .then(response => response.json())
     .then(data => {
-      console.log('Despesas carregadas:', data);
-
       const despesas = data;
       const despesasContainer = document.getElementById('expense-list');
       
@@ -30,22 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${element.descricao}</td>
           <td>${element.categoria.nome}</td>
           <td>R$ ${element.valor.toFixed(2)}</td>
-          <td><button class="btn btn-danger" onclick="deleteDespesa(${element.id})">Excluir</button></td>
+          <td> <button type="button" class="btn btn-outline-secondary"><i class="bi bi-plus-circle"></i></button>
+          <td><button type="button" class="btn btn-primary" onclick="editarDespesa(${element.id})">Editar</button></td>
+          <td><button class="btn btn-danger" onclick="deleteDespesa(${element.id})">Excluir</button></td> 
         `;
         despesasContainer.appendChild(item);
       });
 
       const valorTotal = document.getElementById('value');
       valorTotal.innerHTML = `Total: R$ ${total.toFixed(2)}`;
-      console.log('Valor total:', total);
     })
     .catch(error => {
       console.error('Erro ao carregar despesas:', error);
     });
 });
 
-
-
+// Função para editar uma despesa
+function editarDespesa(id) {
+    window.location.href = `Despesa.html?id=${id}`;
+}
 
 // Função para excluir uma despesa
 function deleteDespesa(id) {
