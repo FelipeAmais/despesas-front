@@ -65,13 +65,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await inicializarPagina();
 
+    const inputData = document.getElementById('data');
+    inputData.max = new Date().toISOString().split('T')[0];
+
   } catch (error) {
     console.error('Erro ao carregar categorias:', error);
   }
 });
 
 
-// submit form listener
+// submit form listener para salvar despesa nova ou atualizar despesa existente
 document.getElementById('form-despesa').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -83,6 +86,11 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
     },
     valor: Number(document.getElementById('valor').value),
   };
+
+  if (!checkValorInput()) {
+    document.getElementById('alert-error').innerText = 'O valor deve ser maior que zero.';
+    return;
+  }
 
   let url = 'http://localhost:8080/despesas';
   let method = 'POST';
@@ -102,6 +110,13 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
 
   window.location.href = '/index.html';
 });
+
+
+// Valida o valor do input para garantir que seja maior ou igual a zero
+function checkValorInput() {
+  const valorInput = Number(document.getElementById('valor').value);
+  return valorInput > 0;
+}
 
 
 // Listener para o select de categorias
