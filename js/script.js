@@ -1,17 +1,42 @@
 //Onload carega despesas
 // e adiciona ao select de despesas e o valor total
 
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('http://localhost:8080/despesas')
-    .then(response => response.json())
-    .then(data => {
-      const despesas = data;
-      const despesasContainer = document.getElementById('expense-list');
-      
-      let total = 0;  // total começa em zero
+document.addEventListener('DOMContentLoaded',  async() => {
+      try { 
+        const response = await fetch('http://localhost:8080/despesas');
+        const data = await response.json();
+        const despesas = data;
+        
+        // Extrai categorias únicas
+        const categorias = [ ...new Set(despesas.map(d => d.categoria.nome)) ]; 
+        const filterSelect = document.getElementById('FilterBy');
+        categorias.forEach(categoria => {
+          const option = document.createElement('option');
+          option.value = categoria;
+          option.textContent = categoria;
+          filterSelect.appendChild(option);
+        });
 
-      despesas.forEach(element => {
-        // Soma o valor total das despesas
+        // Função para filtrar despesas por categoria
+        document.getElementById('FilterBy').addEventListener('change', function() {
+          const selectedCategory = this.value;
+          const filtered = despesas.filter(d => selectedCategory === d.categoria.nome); 
+          renderizarDespesas(selectedCategory === 'all' ? despesas : filtered);
+        });
+
+        renderizarDespesas(despesas); // Renderiza as despesas na tabela
+      }catch(error) {
+        console.error('Erro ao carregar despesas:', error);
+      };
+});
+
+// renderizar despesas
+function renderizarDespesas(despesas) {
+    const despesasContainer = document.getElementById('expense-list'); 
+    despesasContainer.innerHTML = ''; // Limpa a lista antes de renderizar as despesas
+    let total = 0;  // total começa em zero
+
+    despesas.forEach(element => {
         total += element.valor; 
 
         // Formata a data
@@ -24,24 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const item = document.createElement('tr');
         item.innerHTML = `
-          <td>${element.data}</td>
-          <td>${element.descricao}</td>
-          <td>${element.categoria.nome}</td>
-          <td>R$ ${element.valor.toFixed(2)}</td>
-          <td> <button type="button" class="btn btn-outline-secondary"><i class="bi bi-plus-circle"></i></button>
-          <td><button type="button" class="btn btn-primary" onclick="editarDespesa(${element.id})">Editar</button></td>
-          <td><button class="btn btn-danger" onclick="deleteDespesa(${element.id})">Excluir</button></td> 
+            <td>${element.data}</td>
+            <td>${element.descricao}</td>
+            <td>${element.categoria.nome}</td>
+            <td>R$ ${element.valor.toFixed(2)}</td>
+            <td> <button type="button" class="btn btn-outline-secondary"><i class="bi bi-plus-circle"></i></button>
+            <td><button type="button" class="btn btn-primary" onclick="editarDespesa(${element.id})">Editar</button></td>
+            <td><button class="btn btn-danger" onclick="deleteDespesa(${element.id})">Excluir</button></td> 
         `;
         despesasContainer.appendChild(item);
-      });
-
-      const valorTotal = document.getElementById('value');
-      valorTotal.innerHTML = `Total: R$ ${total.toFixed(2)}`;
-    })
-    .catch(error => {
-      console.error('Erro ao carregar despesas:', error);
     });
-});
+    document.getElementById('value').textContent = `Total: R$ ${total.toFixed(2)}`; // Atualiza o total na página 
+} 
+
 
 // Função para editar uma despesa
 function editarDespesa(id) {
