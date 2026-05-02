@@ -7,7 +7,7 @@ document.getElementById('form-categoria').addEventListener('submit', (e) =>{
   };
 
   console.log('Categoria criada:', categoria);
-    fetch('http://localhost:8080/categorias', {
+    fetch('https://dispesas-manager-production.up.railway.app/categorias', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ document.getElementById('form-categoria').addEventListener('submit', (e) =>{
     }).then(response => {
       if (response.ok) {
         console.log('Categoria salva com sucesso');
-        window.location.href = 'novaDespesa.html';
+        window.location.href = 'Despesa.html';
       } else {
         document.getElementById('message').innerText = 'Erro ao salvar categoria';
         console.error('Erro de rede:', error);

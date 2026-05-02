@@ -9,7 +9,7 @@ async function inicializarPagina() {
     modoPagina = "editar";
     despesaEmEdicaoId = Number(id);
     ajustarInterfaceEdicao();
-    const response = await fetch(`http://localhost:8080/despesas/${despesaEmEdicaoId}`);
+    const response = await fetch(`https://dispesas-manager-production.up.railway.app/despesas/${despesaEmEdicaoId}`);
 
     if (!response.ok) {
       alert('Erro ao carregar despesa');
@@ -51,7 +51,7 @@ function preencherFormularioEdicao(despesa) {
 // e adiciona ao select de categorias
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('http://localhost:8080/categorias');
+    const response = await fetch('https://dispesas-manager-production.up.railway.app/categorias');
     const categorias = await response.json();
 
     const select = document.getElementById('categoria');
@@ -92,7 +92,7 @@ document.getElementById('form-despesa').addEventListener('submit', async functio
     return;
   }
 
-  let url = 'http://localhost:8080/despesas';
+  let url = 'https://dispesas-manager-production.up.railway.app/despesas';
   let method = 'POST';
 
   if (modoPagina === 'editar') {

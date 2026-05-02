@@ -3,7 +3,7 @@
 
 document.addEventListener('DOMContentLoaded',  async() => {
       try { 
-        const response = await fetch('http://localhost:8080/despesas');
+        const response = await fetch('https://dispesas-manager-production.up.railway.app/despesas');
         const data = await response.json();
         const despesas = data;
         
@@ -70,7 +70,7 @@ function editarDespesa(id) {
 
 // Função para excluir uma despesa
 function deleteDespesa(id) {
-    fetch(`http://localhost:8080/despesas/${id}`, {
+    fetch(`https://dispesas-manager-production.up.railway.app/despesas/${id}`, {
         method: 'DELETE'
     })
     .then(response => {
